@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		63000F891B78B92300FC47B4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F881B78B92300FC47B4 /* main.swift */; };
+		63000F991B78B9F900FC47B4 /* BacklightModeConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F951B78B9F900FC47B4 /* BacklightModeConfigurations.swift */; };
+		63000F9A1B78B9F900FC47B4 /* CommandLineActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F961B78B9F900FC47B4 /* CommandLineActions.swift */; };
+		63000F9B1B78B9F900FC47B4 /* KeyboardBacklightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F971B78B9F900FC47B4 /* KeyboardBacklightController.swift */; };
+		63000F9C1B78B9F900FC47B4 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F981B78B9F900FC47B4 /* PreferencesManager.swift */; };
+		63000F9D1B78BB1500FC47B4 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F911B78B99100FC47B4 /* CommandLine.swift */; };
+		63000F9E1B78BB1800FC47B4 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F931B78B99100FC47B4 /* Option.swift */; };
+		63000F9F1B78BB1A00FC47B4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63000F941B78B99100FC47B4 /* StringExtensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		63000F831B78B92300FC47B4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		63000F851B78B92300FC47B4 /* MSIKeyboardBacklightController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MSIKeyboardBacklightController; sourceTree = BUILT_PRODUCTS_DIR; };
+		63000F881B78B92300FC47B4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		63000F911B78B99100FC47B4 /* CommandLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLine.swift; sourceTree = "<group>"; };
+		63000F921B78B99100FC47B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63000F931B78B99100FC47B4 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		63000F941B78B99100FC47B4 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		63000F951B78B9F900FC47B4 /* BacklightModeConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacklightModeConfigurations.swift; sourceTree = "<group>"; };
+		63000F961B78B9F900FC47B4 /* CommandLineActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineActions.swift; sourceTree = "<group>"; };
+		63000F971B78B9F900FC47B4 /* KeyboardBacklightController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardBacklightController.swift; sourceTree = "<group>"; };
+		63000F981B78B9F900FC47B4 /* PreferencesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		63000F821B78B92300FC47B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63000F7C1B78B92300FC47B4 = {
+			isa = PBXGroup;
+			children = (
+				63000F871B78B92300FC47B4 /* MSIKeyboardBacklightController */,
+				63000F8F1B78B97F00FC47B4 /* Externals */,
+				63000F861B78B92300FC47B4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63000F861B78B92300FC47B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63000F851B78B92300FC47B4 /* MSIKeyboardBacklightController */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		63000F871B78B92300FC47B4 /* MSIKeyboardBacklightController */ = {
+			isa = PBXGroup;
+			children = (
+				63000F881B78B92300FC47B4 /* main.swift */,
+				63000F951B78B9F900FC47B4 /* BacklightModeConfigurations.swift */,
+				63000F961B78B9F900FC47B4 /* CommandLineActions.swift */,
+				63000F971B78B9F900FC47B4 /* KeyboardBacklightController.swift */,
+				63000F981B78B9F900FC47B4 /* PreferencesManager.swift */,
+			);
+			path = MSIKeyboardBacklightController;
+			sourceTree = "<group>";
+		};
+		63000F8F1B78B97F00FC47B4 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				63000F901B78B99100FC47B4 /* CommandLine */,
+			);
+			name = Externals;
+			sourceTree = "<group>";
+		};
+		63000F901B78B99100FC47B4 /* CommandLine */ = {
+			isa = PBXGroup;
+			children = (
+				63000F911B78B99100FC47B4 /* CommandLine.swift */,
+				63000F921B78B99100FC47B4 /* Info.plist */,
+				63000F931B78B99100FC47B4 /* Option.swift */,
+				63000F941B78B99100FC47B4 /* StringExtensions.swift */,
+			);
+			name = CommandLine;
+			path = ../CommandLine/CommandLine;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63000F841B78B92300FC47B4 /* MSIKeyboardBacklightController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63000F8C1B78B92300FC47B4 /* Build configuration list for PBXNativeTarget "MSIKeyboardBacklightController" */;
+			buildPhases = (
+				63000F811B78B92300FC47B4 /* Sources */,
+				63000F821B78B92300FC47B4 /* Frameworks */,
+				63000F831B78B92300FC47B4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MSIKeyboardBacklightController;
+			productName = MSIKeyboardBacklightController;
+			productReference = 63000F851B78B92300FC47B4 /* MSIKeyboardBacklightController */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63000F7D1B78B92300FC47B4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Rostyslav Dovhaliuk";
+				TargetAttributes = {
+					63000F841B78B92300FC47B4 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 63000F801B78B92300FC47B4 /* Build configuration list for PBXProject "MSIKeyboardBacklightController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 63000F7C1B78B92300FC47B4;
+			productRefGroup = 63000F861B78B92300FC47B4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63000F841B78B92300FC47B4 /* MSIKeyboardBacklightController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63000F811B78B92300FC47B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63000F9F1B78BB1A00FC47B4 /* StringExtensions.swift in Sources */,
+				63000F9E1B78BB1800FC47B4 /* Option.swift in Sources */,
+				63000F9D1B78BB1500FC47B4 /* CommandLine.swift in Sources */,
+				63000F9C1B78B9F900FC47B4 /* PreferencesManager.swift in Sources */,
+				63000F891B78B92300FC47B4 /* main.swift in Sources */,
+				63000F991B78B9F900FC47B4 /* BacklightModeConfigurations.swift in Sources */,
+				63000F9B1B78B9F900FC47B4 /* KeyboardBacklightController.swift in Sources */,
+				63000F9A1B78B9F900FC47B4 /* CommandLineActions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		63000F8A1B78B92300FC47B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		63000F8B1B78B92300FC47B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		63000F8D1B78B92300FC47B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		63000F8E1B78B92300FC47B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63000F801B78B92300FC47B4 /* Build configuration list for PBXProject "MSIKeyboardBacklightController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63000F8A1B78B92300FC47B4 /* Debug */,
+				63000F8B1B78B92300FC47B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63000F8C1B78B92300FC47B4 /* Build configuration list for PBXNativeTarget "MSIKeyboardBacklightController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63000F8D1B78B92300FC47B4 /* Debug */,
+				63000F8E1B78B92300FC47B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63000F7D1B78B92300FC47B4 /* Project object */;
+}
