@@ -21,7 +21,7 @@ class KeyboardBacklightController {
         IOHIDManagerSetDeviceMatching(manager, matchingDictionary as CFDictionary)
         return manager
     }()
-    
+
     func setConfiguration(configuration: BacklightModeConfiguration) throws {
         do {
             let hidDevice = try aquireUSBDevice()

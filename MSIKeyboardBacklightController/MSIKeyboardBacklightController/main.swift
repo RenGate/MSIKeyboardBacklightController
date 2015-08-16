@@ -8,15 +8,18 @@
 
 import Foundation
 
-let actions: [CommandLineAction] = [PrintHelpInfoAction(), RestoreLastModeAction(), SetNormalBacklightModeAction()]
+let actions: [CommandLineAction] = [PrintHelpInfoAction(), RestoreLastModeAction(), SetNormalBacklightModeAction(), SetGamingBacklightModeAction()]
 let cli = CommandLine()
 
 for action: CommandLineAction in actions {
     cli.setOptions(action.commandLineOptions())
     do {
         try cli.parse()
-        action.run()
+        try action.run()
         exit(EXIT_SUCCESS)
+    } catch USBError.USBOperation(let text) {
+        print("Error: \(text)")
+        exit(EXIT_FAILURE)
     } catch {
         continue
     }

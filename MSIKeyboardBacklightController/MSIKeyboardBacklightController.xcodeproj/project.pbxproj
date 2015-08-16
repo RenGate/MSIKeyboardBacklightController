@@ -283,6 +283,7 @@
 				63000F8E1B78B92300FC47B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

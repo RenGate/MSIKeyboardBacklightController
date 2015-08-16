@@ -10,7 +10,7 @@ import Foundation
 
 protocol CommandLineAction {
     func commandLineOptions() -> [Option]
-    func run()
+    func run() throws
 }
 
 class SetNormalBacklightModeAction: CommandLineAction {
@@ -23,7 +23,7 @@ class SetNormalBacklightModeAction: CommandLineAction {
         return [mode, colorLeftOption, colorCenterOption, colorRightOption]
     }
     
-    func run() {
+    func run() throws {
         let modeConfiguration = NormalModeConfiguration()
         guard let leftColor = colorLeftOption.value,
               let centralColor = colorCenterOption.value,
@@ -35,15 +35,29 @@ class SetNormalBacklightModeAction: CommandLineAction {
         modeConfiguration.rightZoneColor = rightColor
         
         let controller = KeyboardBacklightController()
-        do {
-            try controller.setConfiguration(modeConfiguration)
-            PreferencesManager.setModeConfigurationAsDefault(modeConfiguration)
-        } catch USBError.USBOperation(let text) {
-            print("Error: \(text)")
-            return
-        } catch {
-            return
-        }
+        try controller.setConfiguration(modeConfiguration)
+        PreferencesManager.setModeConfigurationAsDefault(modeConfiguration)
+        print("Successfuly changed keyboard backlight configuration.")
+    }
+}
+
+class SetGamingBacklightModeAction: CommandLineAction {
+    private let colorOption = EnumOption<BacklightColor>(longFlag: "color", required: true, helpMessage: "")
+    
+    func commandLineOptions() -> [Option] {
+        let mode = EnumOption<BacklightModeType>(shortFlag: "m", longFlag: "mode", required: true, helpMessage: "")
+        return [mode, colorOption]
+    }
+    
+    func run() throws {
+        guard let color = colorOption.value else { return }
+        
+        let modeConfiguration = GamingModeConfiguration()
+        modeConfiguration.zoneColor = color
+        
+        let controller = KeyboardBacklightController()
+        try controller.setConfiguration(modeConfiguration)
+        PreferencesManager.setModeConfigurationAsDefault(modeConfiguration)
         print("Successfuly changed keyboard backlight configuration.")
     }
 }
@@ -54,32 +68,27 @@ class RestoreLastModeAction: CommandLineAction {
         return [option]
     }
     
-    func run() {
+    func run() throws {
         guard let modeConfiguration = PreferencesManager.defaultModeConfiguration() else {
             print("Warning: Nothing to restore, preferences file is empty.")
             return
         }
         let controller = KeyboardBacklightController()
-        do {
-            try controller.setConfiguration(modeConfiguration)
-        } catch USBError.USBOperation(let text) {
-            print("Error: \(text)")
-            return
-        } catch {
-            return
-        }
+        try controller.setConfiguration(modeConfiguration)
         print("Successfuly restored keyboard backlight configuration.")
     }
 }
 
 class PrintHelpInfoAction: CommandLineAction {
     static let usageMessage =
-    "Control keyboard's backlight of MSI laptops that support SteelSeries Engine 2.\n" +
+    "Control keyboard's backlight on MSI laptops that support SteelSeries Engine 2.\n" +
     "Usage: msikeyboardbacklightcontroller [options]\n" +
     "--help      % Print this info\n" +
     "--restore   % Apply last configuration\n" +
     "--mode normal --color1 green --color2 yellow --color3 orange % Set normal mode " +
-    "where each keyboard's segment is constantly illuminated using specified color.\n" +
+    "where each keyboard segment is constantly illuminated using specified color.\n" +
+    "--mode gaming --color yellow % Set gaming mode where only left keyboard segment is " +
+    "illuminated while others are turned off.\n" +
     "Available colors: black, red, orange, yellow, green, sky, blue, purple, white."
     
     func commandLineOptions() -> [Option] {

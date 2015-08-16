@@ -10,6 +10,7 @@ import Foundation
 
 enum BacklightModeType: String {
     case Normal = "normal"
+    case Gaming = "gaming"
 }
 
 struct Color {
@@ -63,6 +64,26 @@ class NormalModeConfiguration: BacklightModeConfiguration {
             } else {
                 let color = keyboardZoneMapping[index]!.color()
                 report = [0x01, 0x02, 0x40, index, color.red, color.green, color.blue, 0x00]
+            }
+            
+            reports.append(report)
+        }
+        return reports
+    }
+}
+
+class GamingModeConfiguration: BacklightModeConfiguration {
+    var zoneColor: BacklightColor = .Green
+    
+    var featureReports: [[UInt8]] {
+        var reports: [[UInt8]] = []
+        for index in 0...1 {
+            let report: [UInt8]
+            if index == 0 {
+                report = [0x01, 0x02, 0x41, 0x02, 0x00, 0x00, 0x00, 0x00];
+            } else {
+                let color = zoneColor.color()
+                report = [0x01, 0x02, 0x40, 0x01, color.red, color.green, color.blue, 0x00]
             }
             
             reports.append(report)
