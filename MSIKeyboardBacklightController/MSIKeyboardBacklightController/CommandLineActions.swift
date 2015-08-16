@@ -19,17 +19,17 @@ class SetNormalBacklightModeAction: CommandLineAction {
     private let colorRightOption = EnumOption<BacklightColor>(longFlag: "color3", required: true, helpMessage: "")
     
     func commandLineOptions() -> [Option] {
-        let mode = EnumOption<BacklightModeType>(shortFlag: "m", longFlag: "mode", required: true, helpMessage: "")
+        let mode = BoolOption(longFlag: BacklightModeType.Normal.rawValue, required: true, helpMessage: "")
         return [mode, colorLeftOption, colorCenterOption, colorRightOption]
     }
     
     func run() throws {
-        let modeConfiguration = NormalModeConfiguration()
         guard let leftColor = colorLeftOption.value,
               let centralColor = colorCenterOption.value,
               let rightColor = colorRightOption.value
             else { return }
         
+        let modeConfiguration = NormalModeConfiguration()
         modeConfiguration.leftZoneColor = leftColor
         modeConfiguration.centralZoneColor = centralColor
         modeConfiguration.rightZoneColor = rightColor
@@ -45,7 +45,7 @@ class SetGamingBacklightModeAction: CommandLineAction {
     private let colorOption = EnumOption<BacklightColor>(longFlag: "color", required: true, helpMessage: "")
     
     func commandLineOptions() -> [Option] {
-        let mode = EnumOption<BacklightModeType>(shortFlag: "m", longFlag: "mode", required: true, helpMessage: "")
+        let mode = BoolOption(longFlag: BacklightModeType.Gaming.rawValue, required: true, helpMessage: "")
         return [mode, colorOption]
     }
     
@@ -54,6 +54,31 @@ class SetGamingBacklightModeAction: CommandLineAction {
         
         let modeConfiguration = GamingModeConfiguration()
         modeConfiguration.zoneColor = color
+        
+        let controller = KeyboardBacklightController()
+        try controller.setConfiguration(modeConfiguration)
+        PreferencesManager.setModeConfigurationAsDefault(modeConfiguration)
+        print("Successfuly changed keyboard backlight configuration.")
+    }
+}
+
+class SetDualColorBacklightModeAction: CommandLineAction {
+    private let firstColorOption = EnumOption<BacklightColor>(longFlag: "color1", required: true, helpMessage: "")
+    private let secondColorOption = EnumOption<BacklightColor>(longFlag: "color2", required: true, helpMessage: "")
+    
+    func commandLineOptions() -> [Option] {
+        let mode = BoolOption(longFlag: BacklightModeType.DualColor.rawValue, required: true, helpMessage: "")
+        return [mode, firstColorOption, secondColorOption]
+    }
+    
+    func run() throws {
+        guard let firstColor = firstColorOption.value,
+              let secondColor = secondColorOption.value
+            else { return }
+        
+        let modeConfiguration = DualColorModeConfiguration()
+        modeConfiguration.firstColor = firstColor
+        modeConfiguration.secondColor = secondColor
         
         let controller = KeyboardBacklightController()
         try controller.setConfiguration(modeConfiguration)
@@ -85,10 +110,12 @@ class PrintHelpInfoAction: CommandLineAction {
     "Usage: msikeyboardbacklightcontroller [options]\n" +
     "--help      % Print this info\n" +
     "--restore   % Apply last configuration\n" +
-    "--mode normal --color1 green --color2 yellow --color3 orange % Set normal mode " +
+    "--normal --color1 green --color2 yellow --color3 orange % Set normal mode " +
     "where each keyboard segment is constantly illuminated using specified color.\n" +
-    "--mode gaming --color yellow % Set gaming mode where only left keyboard segment is " +
+    "--gaming --color yellow % Set gaming mode where only left keyboard segment is " +
     "illuminated while others are turned off.\n" +
+    "--dualcolor --color1 purple --color2 orange % Set dual color mode where color of keyboard's " +
+    "backlight crossfades between two specified colors.\n" +
     "Available colors: black, red, orange, yellow, green, sky, blue, purple, white."
     
     func commandLineOptions() -> [Option] {

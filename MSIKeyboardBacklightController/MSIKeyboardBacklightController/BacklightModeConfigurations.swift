@@ -11,6 +11,7 @@ import Foundation
 enum BacklightModeType: String {
     case Normal = "normal"
     case Gaming = "gaming"
+    case DualColor = "dualcolor"
 }
 
 struct Color {
@@ -59,6 +60,7 @@ class NormalModeConfiguration: BacklightModeConfiguration {
         for index: UInt8 in 0...3 {
             let keyboardZoneMapping: [UInt8: BacklightColor] = [1: leftZoneColor, 2: centralZoneColor, 3: rightZoneColor]
             let report: [UInt8]
+            
             if index == 0 {
                 report = [0x01, 0x02, 0x41, 0x01, 0x00, 0x00, 0x00, 0x00]
             } else {
@@ -76,17 +78,26 @@ class GamingModeConfiguration: BacklightModeConfiguration {
     var zoneColor: BacklightColor = .Green
     
     var featureReports: [[UInt8]] {
+        let color = zoneColor.color()
+        let reports: [[UInt8]] = [[0x01, 0x02, 0x41, 0x02, 0x00, 0x00, 0x00, 0x00],
+                                  [0x01, 0x02, 0x40, 0x01, color.red, color.green, color.blue, 0x00]]
+        return reports
+    }
+}
+
+class DualColorModeConfiguration: BacklightModeConfiguration {
+    var firstColor: BacklightColor = .Green
+    var secondColor: BacklightColor = .Green
+    
+    var featureReports: [[UInt8]] {
+        let color1 = firstColor.color()
+        let color2 = secondColor.color()
         var reports: [[UInt8]] = []
-        for index in 0...1 {
-            let report: [UInt8]
-            if index == 0 {
-                report = [0x01, 0x02, 0x41, 0x02, 0x00, 0x00, 0x00, 0x00];
-            } else {
-                let color = zoneColor.color()
-                report = [0x01, 0x02, 0x40, 0x01, color.red, color.green, color.blue, 0x00]
-            }
-            
-            reports.append(report)
+        for index: UInt8 in 0..<3 {
+            reports.append([0x01, 0x02, 0x44, index * 3 + 1, color1.red, color1.green, color1.blue, 0x00])
+            reports.append([0x01, 0x02, 0x44, index * 3 + 2, color2.red, color2.green, color2.blue, 0x00])
+            reports.append([0x01, 0x02, 0x44, index * 3 + 3, 0x03, 0x03, 0x03, 0x00])
+            reports.append([0x01, 0x02, 0x41, 0x06, 0x00, 0x00, 0x00, 0x00])
         }
         return reports
     }

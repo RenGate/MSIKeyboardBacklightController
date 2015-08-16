@@ -8,7 +8,7 @@
 
 import Foundation
 
-let actions: [CommandLineAction] = [PrintHelpInfoAction(), RestoreLastModeAction(), SetNormalBacklightModeAction(), SetGamingBacklightModeAction()]
+let actions: [CommandLineAction] = [PrintHelpInfoAction(), RestoreLastModeAction(), SetNormalBacklightModeAction(), SetGamingBacklightModeAction(), SetDualColorBacklightModeAction()]
 let cli = CommandLine()
 
 for action: CommandLineAction in actions {
