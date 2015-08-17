@@ -87,6 +87,62 @@ class SetDualColorBacklightModeAction: CommandLineAction {
     }
 }
 
+class SetWaveBacklightModeAction: CommandLineAction {
+    private let firstColorOption = EnumOption<BacklightColor>(longFlag: "color1", required: true, helpMessage: "")
+    private let secondColorOption = EnumOption<BacklightColor>(longFlag: "color2", required: true, helpMessage: "")
+    private let thirdColorOption = EnumOption<BacklightColor>(longFlag: "color3", required: true, helpMessage: "")
+    
+    func commandLineOptions() -> [Option] {
+        let mode = BoolOption(longFlag: BacklightModeType.Wave.rawValue, required: true, helpMessage: "")
+        return [mode, firstColorOption, secondColorOption, thirdColorOption]
+    }
+    
+    func run() throws {
+        guard let firstColor = firstColorOption.value,
+            let secondColor = secondColorOption.value,
+            let thirdColor = thirdColorOption.value
+            else { return }
+        
+        let modeConfiguration = WaveModeConfiguration()
+        modeConfiguration.firstColor = firstColor
+        modeConfiguration.secondColor = secondColor
+        modeConfiguration.thirdColor = thirdColor
+        
+        let controller = KeyboardBacklightController()
+        try controller.setConfiguration(modeConfiguration)
+        PreferencesManager.setModeConfigurationAsDefault(modeConfiguration)
+        print("Successfuly changed keyboard backlight configuration.")
+    }
+}
+
+class SetBreathingBacklightModeAction: CommandLineAction {
+    private let firstColorOption = EnumOption<BacklightColor>(longFlag: "color1", required: true, helpMessage: "")
+    private let secondColorOption = EnumOption<BacklightColor>(longFlag: "color2", required: true, helpMessage: "")
+    private let thirdColorOption = EnumOption<BacklightColor>(longFlag: "color3", required: true, helpMessage: "")
+    
+    func commandLineOptions() -> [Option] {
+        let mode = BoolOption(longFlag: BacklightModeType.Breathing.rawValue, required: true, helpMessage: "")
+        return [mode, firstColorOption, secondColorOption, thirdColorOption]
+    }
+    
+    func run() throws {
+        guard let firstColor = firstColorOption.value,
+            let secondColor = secondColorOption.value,
+            let thirdColor = thirdColorOption.value
+            else { return }
+        
+        let modeConfiguration = BreathingModeConfiguration()
+        modeConfiguration.firstColor = firstColor
+        modeConfiguration.secondColor = secondColor
+        modeConfiguration.thirdColor = thirdColor
+        
+        let controller = KeyboardBacklightController()
+        try controller.setConfiguration(modeConfiguration)
+        PreferencesManager.setModeConfigurationAsDefault(modeConfiguration)
+        print("Successfuly changed keyboard backlight configuration.")
+    }
+}
+
 class RestoreLastModeAction: CommandLineAction {
     func commandLineOptions() -> [Option] {
         let option = BoolOption(shortFlag: "r", longFlag: "restore", required: true, helpMessage: "")
@@ -116,6 +172,10 @@ class PrintHelpInfoAction: CommandLineAction {
     "illuminated while others are turned off.\n" +
     "--dualcolor --color1 purple --color2 orange % Set dual color mode where color of keyboard's " +
     "backlight crossfades between two specified colors.\n" +
+    "--wave --color1 red --color2 orange --color3 green % Set wave mode where all three sections of " +
+    "keyborad are sequentially lit from left to right using specified colors.\n" +
+    "--breathing --color1 red --color2 orange --color3 green % Set breathing mode where backlight of all " +
+    "keyboard segments crossfades between turned on and turned off state.\n" +
     "Available colors: black, red, orange, yellow, green, sky, blue, purple, white."
     
     func commandLineOptions() -> [Option] {

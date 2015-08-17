@@ -19,6 +19,14 @@ struct SerializationConstants {
     
     static let DualColorFirstColorKey = "DualColorFirstColorKey"
     static let DualColorSecondColorKey = "DualColorSecondColorKey"
+    
+    static let WaveFirstColorKey = "WaveFirstColorKey"
+    static let WaveSecondColorKey = "WaveSecondColorKey"
+    static let WaveThirdColorKey = "WaveThirdColorKey"
+    
+    static let BreathingFirstColorKey = "BreathingFirstColorKey"
+    static let BreathingSecondColorKey = "BreathingSecondColorKey"
+    static let BreathingThirdColorKey = "BreathingThirdColorKey"
 }
 
 class PreferencesManager {
@@ -36,8 +44,18 @@ class PreferencesManager {
             CFPreferencesSetAppValue(SerializationConstants.BacklightModeKey, BacklightModeType.DualColor.rawValue, kCFPreferencesCurrentApplication)
             CFPreferencesSetAppValue(SerializationConstants.DualColorFirstColorKey, dualColorMode.firstColor.rawValue, kCFPreferencesCurrentApplication)
             CFPreferencesSetAppValue(SerializationConstants.DualColorSecondColorKey, dualColorMode.secondColor.rawValue, kCFPreferencesCurrentApplication)
+        case let waveMode as WaveModeConfiguration:
+            CFPreferencesSetAppValue(SerializationConstants.BacklightModeKey, BacklightModeType.Wave.rawValue, kCFPreferencesCurrentApplication)
+            CFPreferencesSetAppValue(SerializationConstants.WaveFirstColorKey, waveMode.firstColor.rawValue, kCFPreferencesCurrentApplication)
+            CFPreferencesSetAppValue(SerializationConstants.WaveSecondColorKey, waveMode.secondColor.rawValue, kCFPreferencesCurrentApplication)
+            CFPreferencesSetAppValue(SerializationConstants.WaveThirdColorKey, waveMode.thirdColor.rawValue, kCFPreferencesCurrentApplication)
+        case let breathingMode as BreathingModeConfiguration:
+            CFPreferencesSetAppValue(SerializationConstants.BacklightModeKey, BacklightModeType.Breathing.rawValue, kCFPreferencesCurrentApplication)
+            CFPreferencesSetAppValue(SerializationConstants.BreathingFirstColorKey, breathingMode.firstColor.rawValue, kCFPreferencesCurrentApplication)
+            CFPreferencesSetAppValue(SerializationConstants.BreathingSecondColorKey, breathingMode.secondColor.rawValue, kCFPreferencesCurrentApplication)
+            CFPreferencesSetAppValue(SerializationConstants.BreathingThirdColorKey, breathingMode.thirdColor.rawValue, kCFPreferencesCurrentApplication)
         default:
-            break
+            fatalError("Unknown configuration was passed for serialization")
         }
         CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication)
     }
@@ -79,6 +97,38 @@ class PreferencesManager {
                 if let secondColorName = CFPreferencesCopyAppValue(SerializationConstants.DualColorSecondColorKey, kCFPreferencesCurrentApplication) as? String,
                     let color = BacklightColor(rawValue: secondColorName) {
                         configuration.secondColor = color
+                }
+                return configuration
+                
+            case .Wave:
+                let configuration = WaveModeConfiguration()
+                if let firstColorName = CFPreferencesCopyAppValue(SerializationConstants.WaveFirstColorKey, kCFPreferencesCurrentApplication) as? String,
+                    let color = BacklightColor(rawValue: firstColorName) {
+                        configuration.firstColor = color
+                }
+                if let secondColorName = CFPreferencesCopyAppValue(SerializationConstants.WaveSecondColorKey, kCFPreferencesCurrentApplication) as? String,
+                    let color = BacklightColor(rawValue: secondColorName) {
+                        configuration.secondColor = color
+                }
+                if let thirdColorName = CFPreferencesCopyAppValue(SerializationConstants.WaveThirdColorKey, kCFPreferencesCurrentApplication) as? String,
+                    let color = BacklightColor(rawValue: thirdColorName) {
+                        configuration.thirdColor = color
+                }
+                return configuration
+             
+            case .Breathing:
+                let configuration = BreathingModeConfiguration()
+                if let firstColorName = CFPreferencesCopyAppValue(SerializationConstants.BreathingFirstColorKey, kCFPreferencesCurrentApplication) as? String,
+                    let color = BacklightColor(rawValue: firstColorName) {
+                        configuration.firstColor = color
+                }
+                if let secondColorName = CFPreferencesCopyAppValue(SerializationConstants.BreathingSecondColorKey, kCFPreferencesCurrentApplication) as? String,
+                    let color = BacklightColor(rawValue: secondColorName) {
+                        configuration.secondColor = color
+                }
+                if let thirdColorName = CFPreferencesCopyAppValue(SerializationConstants.BreathingThirdColorKey, kCFPreferencesCurrentApplication) as? String,
+                    let color = BacklightColor(rawValue: thirdColorName) {
+                        configuration.thirdColor = color
                 }
                 return configuration
             }

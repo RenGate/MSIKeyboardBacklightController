@@ -12,6 +12,8 @@ enum BacklightModeType: String {
     case Normal = "normal"
     case Gaming = "gaming"
     case DualColor = "dualcolor"
+    case Wave = "wave"
+    case Breathing = "breathing"
 }
 
 struct Color {
@@ -98,6 +100,42 @@ class DualColorModeConfiguration: BacklightModeConfiguration {
             reports.append([0x01, 0x02, 0x44, index * 3 + 2, color2.red, color2.green, color2.blue, 0x00])
             reports.append([0x01, 0x02, 0x44, index * 3 + 3, 0x03, 0x03, 0x03, 0x00])
             reports.append([0x01, 0x02, 0x41, 0x06, 0x00, 0x00, 0x00, 0x00])
+        }
+        return reports
+    }
+}
+
+class WaveModeConfiguration: BacklightModeConfiguration {
+    var firstColor: BacklightColor = .Green
+    var secondColor: BacklightColor = .Green
+    var thirdColor: BacklightColor = .Green
+    
+    var featureReports: [[UInt8]] {
+        let colors = [firstColor.color(), secondColor.color(), thirdColor.color()]
+        var reports: [[UInt8]] = []
+        for index: UInt8 in 0..<3 {
+            reports.append([0x01, 0x02, 0x44, index * 3 + 1, colors[Int(index)].red, colors[Int(index)].green, colors[Int(index)].blue, 0x00])
+            reports.append([0x01, 0x02, 0x44, index * 3 + 2, 0x00, 0x00, 0x00, 0x00])
+            reports.append([0x01, 0x02, 0x44, index * 3 + 3, 0x03, 0x03, 0x03, 0x00])
+            reports.append([0x01, 0x02, 0x41, 0x05, 0x00, 0x00, 0x00, 0x00])
+        }
+        return reports
+    }
+}
+
+class BreathingModeConfiguration: BacklightModeConfiguration {
+    var firstColor: BacklightColor = .Green
+    var secondColor: BacklightColor = .Green
+    var thirdColor: BacklightColor = .Green
+    
+    var featureReports: [[UInt8]] {
+        let colors = [firstColor.color(), secondColor.color(), thirdColor.color()]
+        var reports: [[UInt8]] = []
+        for index: UInt8 in 0..<3 {
+            reports.append([0x01, 0x02, 0x44, index * 3 + 1, colors[Int(index)].red, colors[Int(index)].green, colors[Int(index)].blue, 0x00])
+            reports.append([0x01, 0x02, 0x44, index * 3 + 2, 0x00, 0x00, 0x00, 0x00])
+            reports.append([0x01, 0x02, 0x44, index * 3 + 3, 0x03, 0x03, 0x03, 0x00])
+            reports.append([0x01, 0x02, 0x41, 0x03, 0x00, 0x00, 0x00, 0x00])
         }
         return reports
     }
