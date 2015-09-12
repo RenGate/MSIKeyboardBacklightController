@@ -165,6 +165,7 @@ class PrintHelpInfoAction: CommandLineAction {
     "Control keyboard's backlight on MSI laptops that support SteelSeries Engine 2.\n" +
     "Usage: msikeyboardbacklightcontroller [options]\n" +
     "--help      % Print this info\n" +
+    "--version   % Print utility version\n" +
     "--restore   % Apply last configuration\n" +
     "--normal --color1 green --color2 yellow --color3 orange % Set normal mode " +
     "where each keyboard segment is constantly illuminated using specified color.\n" +
@@ -185,5 +186,16 @@ class PrintHelpInfoAction: CommandLineAction {
     
     func run() {
         print(PrintHelpInfoAction.usageMessage)
+    }
+}
+
+class PrintVersionAction: CommandLineAction {
+    func commandLineOptions() -> [Option] {
+        let option = BoolOption(shortFlag: "v", longFlag: "version", required: true, helpMessage: "")
+        return [option]
+    }
+    
+    func run() {
+        print("1.0.0")
     }
 }
